@@ -1,7 +1,5 @@
 package org.edinarobotics.scouting;
 
-import org.edinarobotics.scouting.gui.TestJFrame;
-
 /**
  *
  * @author aoneill
@@ -13,6 +11,6 @@ public class Main {
    */
   public static void main(String[] args) 
   {
-    new TestJFrame();
+    
   }
 }
