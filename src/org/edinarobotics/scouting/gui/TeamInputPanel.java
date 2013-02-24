@@ -5,6 +5,8 @@
 package org.edinarobotics.scouting.gui;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 public class TeamInputPanel extends JPanel
 {
   private static String TEAM_LABEL_TEXT = "Team:";
+  private static String TEAM_LIST_DEFAULT_TEXT = "Select...";
   private static String PENALTIES_LABEL_TEXT = "Penalties:";
   private static String COMMENTS_LABEL_TEXT = "Comments:";
   
@@ -28,20 +31,28 @@ public class TeamInputPanel extends JPanel
   private static String PYRAMID_CLIMB_BOTTOM_LABEL_TEXT = "10";
   private static String PYRAMID_NO_CLIMB_LABEL_TEXT = "No";
   
-  
   private static String FRISBEES_SHOT_LABEL_TEXT = "Frisbees Shot:";
   
   private static int AUTO_GOAL_MULTIPLIER = 2;
+  private static int GOAL_UPPER = 3;
+  private static int GOAL_MIDDLE = 2;
+  private static int GOAL_LOW = 1;
+  
+  private static int CLIMB_UPPER = 30;
+  private static int CLIMB_MIDDLE = 20;
+  private static int CLIMB_BOTTOM = 10;
+  
  
   private static int borderThickness = 4; 
   private Color borderColor = Color.GRAY;
   
+  private String[] teamList = {};
+  
   /**
    * Creates new form NewJPanel
    */
-  public TeamInputPanel()//Color color) 
+  public TeamInputPanel()
   {
-    //borderColor = color;
     initComponents();
   }
 
@@ -54,6 +65,7 @@ public class TeamInputPanel extends JPanel
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    teleopClimbButtonGroup = new javax.swing.ButtonGroup();
     tabbedPanel = new javax.swing.JTabbedPane();
     autoJPanel = new javax.swing.JPanel();
     autoHighGoalLabel = new javax.swing.JLabel();
@@ -83,9 +95,9 @@ public class TeamInputPanel extends JPanel
     comentsJPanel = new javax.swing.JPanel();
     commentsLabel = new javax.swing.JLabel();
     commentsScrollPane = new javax.swing.JScrollPane();
-    commentTextArea = new javax.swing.JTextArea();
+    commentsTextArea = new javax.swing.JTextArea();
     teamLabel = new javax.swing.JLabel();
-    teamInput = new javax.swing.JTextField();
+    teamComboBox = new javax.swing.JComboBox();
     penaltiesInput = new javax.swing.JTextField();
     penaltiesLabel = new javax.swing.JLabel();
 
@@ -165,15 +177,20 @@ public class TeamInputPanel extends JPanel
     teleopClimbLabel.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
     teleopClimbLabel.setText(PYRAMID_CLIMB_LABEL_TEXT);
 
+    teleopClimbButtonGroup.add(teleopClimbNoButton);
     teleopClimbNoButton.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    teleopClimbNoButton.setSelected(true);
     teleopClimbNoButton.setText(PYRAMID_NO_CLIMB_LABEL_TEXT);
 
+    teleopClimbButtonGroup.add(teleopClimb10Button);
     teleopClimb10Button.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
     teleopClimb10Button.setText(PYRAMID_CLIMB_BOTTOM_LABEL_TEXT);
 
+    teleopClimbButtonGroup.add(teleopClimb20Button);
     teleopClimb20Button.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
     teleopClimb20Button.setText(PYRAMID_CLIMB_MIDDLE_LABEL_TEXT);
 
+    teleopClimbButtonGroup.add(teleopClimb30Button);
     teleopClimb30Button.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
     teleopClimb30Button.setText(PYRAMID_CLIMB_TOP_LABEL_TEXT);
 
@@ -206,9 +223,8 @@ public class TeamInputPanel extends JPanel
               .add(teleopJPanelLayout.createSequentialGroup()
                 .add(teleopPyramidGoalLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(teleopPyramidGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-            .add(0, 52, Short.MAX_VALUE))
-          .add(org.jdesktop.layout.GroupLayout.TRAILING, teleopJPanelLayout.createSequentialGroup()
+                .add(teleopPyramidGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+          .add(teleopJPanelLayout.createSequentialGroup()
             .add(teleopClimbLabel)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(teleopClimbNoButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -217,9 +233,8 @@ public class TeamInputPanel extends JPanel
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(teleopClimb20Button, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(teleopClimb30Button, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(0, 0, Short.MAX_VALUE)))
-        .addContainerGap())
+            .add(teleopClimb30Button, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     teleopJPanelLayout.setVerticalGroup(
       teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -258,9 +273,9 @@ public class TeamInputPanel extends JPanel
 
     commentsLabel.setText(COMMENTS_LABEL_TEXT);
 
-    commentTextArea.setColumns(18);
-    commentTextArea.setRows(5);
-    commentsScrollPane.setViewportView(commentTextArea);
+    commentsTextArea.setColumns(18);
+    commentsTextArea.setRows(5);
+    commentsScrollPane.setViewportView(commentsTextArea);
 
     org.jdesktop.layout.GroupLayout comentsJPanelLayout = new org.jdesktop.layout.GroupLayout(comentsJPanel);
     comentsJPanel.setLayout(comentsJPanelLayout);
@@ -287,6 +302,13 @@ public class TeamInputPanel extends JPanel
 
     teamLabel.setText(TEAM_LABEL_TEXT);
 
+    teamComboBox.setModel(new javax.swing.DefaultComboBoxModel(teamList));
+    teamComboBox.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        teamComboBoxActionPerformed(evt);
+      }
+    });
+
     penaltiesLabel.setText(PENALTIES_LABEL_TEXT);
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
@@ -303,17 +325,17 @@ public class TeamInputPanel extends JPanel
           .add(layout.createSequentialGroup()
             .add(teamLabel)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(teamInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(teamComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
           .add(tabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 301, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .add(3, 3, 3))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-        .add(3, 3, 3)
+        .add(5, 5, 5)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(teamLabel)
-          .add(teamInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(teamComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(tabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 235, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -324,30 +346,146 @@ public class TeamInputPanel extends JPanel
     );
   }// </editor-fold>//GEN-END:initComponents
 
+  /**
+   * Easter Egg Code...
+   * @param evt 
+   */
+  private void teamComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamComboBoxActionPerformed
+    easterEgg();
+  }//GEN-LAST:event_teamComboBoxActionPerformed
+
   public int getAutoScore()
   {
-    return 0;
+    int score = 0;
+    try
+    {
+      score += textFieldToScore(autoHighGoalInput.getText()) * GOAL_UPPER * AUTO_GOAL_MULTIPLIER;
+      score += textFieldToScore(autoMiddleGoalInput.getText()) * GOAL_MIDDLE * AUTO_GOAL_MULTIPLIER;
+      score += textFieldToScore(autoLowGoalInput.getText()) * GOAL_LOW * AUTO_GOAL_MULTIPLIER;
+    }
+    catch (Exception e)
+    {
+      JOptionPane.showMessageDialog(this, 
+              "Error in Autonomous for Team " + 
+              teamComboBox.getSelectedItem().toString());
+    }
+    
+    return score;
+  }
+  
+  public int getAutoShots()
+  {
+    return textFieldToScore(autoFrisbeesShotInput.getText());
   }
   
   public int getMainScore()
   {
-    return 0;
+    int score = 0;
+    try
+    {
+      score += textFieldToScore(teleopHighGoalInput.getText()) * GOAL_UPPER;
+      score += textFieldToScore(teleopMiddleGoalInput.getText()) * GOAL_MIDDLE;
+      score += textFieldToScore(teleopLowGoalInput.getText()) * GOAL_LOW;
+    }
+    catch (Exception e)
+    {
+      JOptionPane.showMessageDialog(this, 
+              "Error in Tele-Op / End Game for Team " + 
+              teamComboBox.getSelectedItem().toString());
+    }
+    
+    return score;
+  }
+  
+  public int getMainGameShots()
+  {
+    return textFieldToScore(teleopFrisbeesShotInput.getText());
   }
   
   public int getPyramidAttempt()
   {
-    return 0;
+    return teleopClimbButtonGroup.isSelected(teleopClimbNoButton.getModel()) ?
+            0 : 1;
   }
   
   public int getPyramidScore()
   {
-    return 0;
+    int score = 0;
+    
+    score += teleopClimbButtonGroup.isSelected(teleopClimb10Button.getModel()) ?
+            CLIMB_UPPER : 0;
+    score += teleopClimbButtonGroup.isSelected(teleopClimb20Button.getModel()) ?
+            CLIMB_MIDDLE : 0;
+    score += teleopClimbButtonGroup.isSelected(teleopClimb30Button.getModel()) ?
+            CLIMB_BOTTOM : 0;
+    score *= teleopClimbButtonGroup.isSelected(teleopClimbNoButton.getModel()) ?
+            0 : 1;
+    
+    if((getPyramidAttempt() == 1) && score > 0)
+    {
+      return score;
+    }
+    else
+    {
+      JOptionPane.showMessageDialog(this, 
+              "Error in Pyramid Score for Team " + 
+              teamComboBox.getSelectedItem().toString());
+      return 0;
+    }
+  }
+  
+  public String getPenalties()
+  {
+    return penaltiesInput.getText();
+  }
+  
+  public String getComments()
+  {
+    return commentsTextArea.getText();
   }
   
   public void setBorderColor(Color color)
   {
     borderColor = color;
     setBorder(new javax.swing.border.LineBorder(borderColor, borderThickness, true));
+  }
+  
+  public void setTeamList(ArrayList<String> list)
+  {
+    list.add(TEAM_LIST_DEFAULT_TEXT);
+    setTeamList(list.toArray(new String[0]));
+  }
+  
+  private void setTeamList(String[] list)
+  {
+    teamList = list;
+    teamComboBox.setModel(new javax.swing.DefaultComboBoxModel(teamList));
+    easterEgg();
+  }
+  
+  private int textFieldToScore(String s)
+  {
+    return s.equals("") ? 0 : Integer.parseInt(s);
+  }
+  
+  private void easterEgg()
+  {
+    if(teamComboBox.getSelectedItem().toString().equals("1816"))
+    {
+      setBorder(new javax.swing.border.LineBorder(Color.GREEN, borderThickness, true));
+    }
+    else if(teamComboBox.getSelectedItem().toString().equals("2052"))
+    {
+      setBorder(new javax.swing.border.LineBorder(new Color(128, 0, 0), borderThickness, true));
+    }
+    else if(teamComboBox.getSelectedItem().toString().equals("4511"))
+    {
+      setBorder(new javax.swing.border.LineBorder(new Color(0, 56, 174), borderThickness, true));
+    }
+    else
+    {
+      setBorderColor(borderColor);
+    }
   }
   
   // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -361,17 +499,18 @@ public class TeamInputPanel extends JPanel
   private javax.swing.JTextField autoMiddleGoalInput;
   private javax.swing.JLabel autoMiddleGoalLabel;
   private javax.swing.JPanel comentsJPanel;
-  private javax.swing.JTextArea commentTextArea;
   private javax.swing.JLabel commentsLabel;
   private javax.swing.JScrollPane commentsScrollPane;
+  private javax.swing.JTextArea commentsTextArea;
   private javax.swing.JTextField penaltiesInput;
   private javax.swing.JLabel penaltiesLabel;
   private javax.swing.JTabbedPane tabbedPanel;
-  private javax.swing.JTextField teamInput;
+  private javax.swing.JComboBox teamComboBox;
   private javax.swing.JLabel teamLabel;
   private javax.swing.JRadioButton teleopClimb10Button;
   private javax.swing.JRadioButton teleopClimb20Button;
   private javax.swing.JRadioButton teleopClimb30Button;
+  private javax.swing.ButtonGroup teleopClimbButtonGroup;
   private javax.swing.JLabel teleopClimbLabel;
   private javax.swing.JRadioButton teleopClimbNoButton;
   private javax.swing.JTextField teleopFrisbeesShotInput;

@@ -1,13 +1,16 @@
 package org.edinarobotics.scouting.gui;
 
-import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
  * @author aoneill
  */
-public class DataInputFrame extends javax.swing.JFrame {
-
+public class DataInputFrame extends javax.swing.JFrame
+{
+  private static String MATCH_NUMBER_LABEL_TEXT = "Match:";
+  private static String BLUE_MATCH_SCORE_LABEL_TEXT = "Blue Alliance Score:";
+  private static String RED_MATCH_SCORE_LABEL_TEXT = "Red Alliance Score:";
   /**
    * Creates new form DataInputFrame
    */
@@ -31,82 +34,133 @@ public class DataInputFrame extends javax.swing.JFrame {
     teamInputPanel4 = new org.edinarobotics.scouting.gui.TeamInputPanel();
     teamInputPanel5 = new org.edinarobotics.scouting.gui.TeamInputPanel();
     teamInputPanel6 = new org.edinarobotics.scouting.gui.TeamInputPanel();
-    jMenuBar1 = new javax.swing.JMenuBar();
-    jMenu1 = new javax.swing.JMenu();
-    jMenuItem1 = new javax.swing.JMenuItem();
-    jMenu2 = new javax.swing.JMenu();
+    matchLabel = new javax.swing.JLabel();
+    matchInput = new javax.swing.JTextField();
+    blueMatchScoreLabel = new javax.swing.JLabel();
+    blueMatchScoreInput = new javax.swing.JTextField();
+    redMatchScoreLabel = new javax.swing.JLabel();
+    redMatchScoreInput = new javax.swing.JTextField();
+    scoutButton = new javax.swing.JButton();
+    menuBar = new javax.swing.JMenuBar();
+    fileMenu = new javax.swing.JMenu();
+    editMenu = new javax.swing.JMenu();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jMenu1.setText("File");
+    matchLabel.setText(MATCH_NUMBER_LABEL_TEXT);
 
-    jMenuItem1.setText("jMenuItem1");
-    jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+    blueMatchScoreLabel.setText(BLUE_MATCH_SCORE_LABEL_TEXT);
+
+    redMatchScoreLabel.setText(RED_MATCH_SCORE_LABEL_TEXT);
+
+    scoutButton.setText("Scout!");
+    scoutButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jMenuItem1ActionPerformed(evt);
+        scoutButtonActionPerformed(evt);
       }
     });
-    jMenu1.add(jMenuItem1);
 
-    jMenuBar1.add(jMenu1);
+    fileMenu.setText("File");
+    menuBar.add(fileMenu);
 
-    jMenu2.setText("Edit");
-    jMenuBar1.add(jMenu2);
+    editMenu.setText("Edit");
+    menuBar.add(editMenu);
 
-    setJMenuBar(jMenuBar1);
+    setJMenuBar(menuBar);
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .addContainerGap()
+        .add(6, 6, 6)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createSequentialGroup()
+            .add(teamInputPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(6, 6, 6)
+            .add(teamInputPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(6, 6, 6)
+            .add(teamInputPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(0, 0, Short.MAX_VALUE))
           .add(layout.createSequentialGroup()
             .add(teamInputPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .add(6, 6, 6)
             .add(teamInputPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .add(6, 6, 6)
             .add(teamInputPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(6, 6, 6))
-          .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-            .add(teamInputPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(6, 6, 6)
-            .add(teamInputPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(6, 6, 6)
-            .add(teamInputPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())))
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(layout.createSequentialGroup()
+                .add(12, 12, 12)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                  .add(org.jdesktop.layout.GroupLayout.TRAILING, matchLabel)
+                  .add(blueMatchScoreLabel)
+                  .add(redMatchScoreLabel))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                  .add(org.jdesktop.layout.GroupLayout.TRAILING, blueMatchScoreInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(org.jdesktop.layout.GroupLayout.TRAILING, matchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                  .add(redMatchScoreInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+              .add(layout.createSequentialGroup()
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(scoutButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+        .add(6, 6, 6))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .addContainerGap()
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-          .add(teamInputPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(teamInputPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(teamInputPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .add(6, 6, 6)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, teamInputPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, teamInputPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, teamInputPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(layout.createSequentialGroup()
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+              .add(matchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(matchLabel))
+            .add(6, 6, 6)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+              .add(blueMatchScoreInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(blueMatchScoreLabel))
+            .add(6, 6, 6)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+              .add(redMatchScoreInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(redMatchScoreLabel))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(scoutButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         .add(6, 6, 6)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-          .add(teamInputPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(teamInputPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(teamInputPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(org.jdesktop.layout.GroupLayout.LEADING, teamInputPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(org.jdesktop.layout.GroupLayout.LEADING, teamInputPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(org.jdesktop.layout.GroupLayout.LEADING, teamInputPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-  private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    // TODO add your handling code here:
-    System.out.println("Paint!");
-    teamInputPanel1.setBorderColor(Color.GREEN);
-  }//GEN-LAST:event_jMenuItem1ActionPerformed
+  private void scoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoutButtonActionPerformed
+    String[][] data = new String[6][7];
+    
+    data[0][0] = 
+    data[1][0] = 
+    data[2][0] = 
+    data[3][0] = 
+    data[4][0] = 
+    data[5][0] = 
+  }//GEN-LAST:event_scoutButtonActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JMenu jMenu1;
-  private javax.swing.JMenu jMenu2;
-  private javax.swing.JMenuBar jMenuBar1;
-  private javax.swing.JMenuItem jMenuItem1;
+  private javax.swing.JTextField blueMatchScoreInput;
+  private javax.swing.JLabel blueMatchScoreLabel;
+  private javax.swing.JMenu editMenu;
+  private javax.swing.JMenu fileMenu;
+  private javax.swing.JTextField matchInput;
+  private javax.swing.JLabel matchLabel;
+  private javax.swing.JMenuBar menuBar;
+  private javax.swing.JTextField redMatchScoreInput;
+  private javax.swing.JLabel redMatchScoreLabel;
+  private javax.swing.JButton scoutButton;
   private org.edinarobotics.scouting.gui.TeamInputPanel teamInputPanel1;
   private org.edinarobotics.scouting.gui.TeamInputPanel teamInputPanel2;
   private org.edinarobotics.scouting.gui.TeamInputPanel teamInputPanel3;
