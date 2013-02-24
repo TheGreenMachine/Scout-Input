@@ -22,11 +22,18 @@ public class TeamInputPanel extends JPanel
   private static String MIDDLE_GOAL_LABEL_TEXT = "Middle Goal";
   private static String LOW_GOAL_LABEL_TEXT = "Low Goal:";
   
+  private static String PYRAMID_CLIMB_LABEL_TEXT = "Climbing:";
+  private static String PYRAMID_CLIMB_TOP_LABEL_TEXT = "30";
+  private static String PYRAMID_CLIMB_MIDDLE_LABEL_TEXT = "20";
+  private static String PYRAMID_CLIMB_BOTTOM_LABEL_TEXT = "10";
+  private static String PYRAMID_NO_CLIMB_LABEL_TEXT = "No";
+  
+  
   private static String FRISBEES_SHOT_LABEL_TEXT = "Frisbees Shot:";
   
-  private static int AUTO_HIGH_GOAL_MULTIPLIER = 1;
+  private static int AUTO_GOAL_MULTIPLIER = 2;
  
-  
+  private static int borderThickness = 4; 
   private Color borderColor = Color.GRAY;
   
   /**
@@ -68,6 +75,11 @@ public class TeamInputPanel extends JPanel
     teleopFrisbeesShotInput = new javax.swing.JTextField();
     teleopPyramidGoalLabel = new javax.swing.JLabel();
     teleopPyramidGoalInput = new javax.swing.JTextField();
+    teleopClimbLabel = new javax.swing.JLabel();
+    teleopClimbNoButton = new javax.swing.JRadioButton();
+    teleopClimb10Button = new javax.swing.JRadioButton();
+    teleopClimb20Button = new javax.swing.JRadioButton();
+    teleopClimb30Button = new javax.swing.JRadioButton();
     comentsJPanel = new javax.swing.JPanel();
     commentsLabel = new javax.swing.JLabel();
     commentsScrollPane = new javax.swing.JScrollPane();
@@ -77,7 +89,7 @@ public class TeamInputPanel extends JPanel
     penaltiesInput = new javax.swing.JTextField();
     penaltiesLabel = new javax.swing.JLabel();
 
-    setBorder(new javax.swing.border.LineBorder(borderColor, 4, true));
+    setBorder(new javax.swing.border.LineBorder(borderColor, borderThickness, true));
     setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
 
     tabbedPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -150,34 +162,64 @@ public class TeamInputPanel extends JPanel
 
     teleopPyramidGoalLabel.setText(PYRAMID_GOAL_LABEL_TEXT);
 
+    teleopClimbLabel.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    teleopClimbLabel.setText(PYRAMID_CLIMB_LABEL_TEXT);
+
+    teleopClimbNoButton.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    teleopClimbNoButton.setText(PYRAMID_NO_CLIMB_LABEL_TEXT);
+
+    teleopClimb10Button.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    teleopClimb10Button.setText(PYRAMID_CLIMB_BOTTOM_LABEL_TEXT);
+
+    teleopClimb20Button.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    teleopClimb20Button.setText(PYRAMID_CLIMB_MIDDLE_LABEL_TEXT);
+
+    teleopClimb30Button.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+    teleopClimb30Button.setText(PYRAMID_CLIMB_TOP_LABEL_TEXT);
+
     org.jdesktop.layout.GroupLayout teleopJPanelLayout = new org.jdesktop.layout.GroupLayout(teleopJPanel);
     teleopJPanel.setLayout(teleopJPanelLayout);
     teleopJPanelLayout.setHorizontalGroup(
       teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(teleopJPanelLayout.createSequentialGroup()
-        .addContainerGap(57, Short.MAX_VALUE)
+        .addContainerGap()
         .add(teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(teleopJPanelLayout.createSequentialGroup()
-            .add(teleopHighGoalLabel)
+            .add(57, 57, 57)
+            .add(teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(teleopJPanelLayout.createSequentialGroup()
+                .add(teleopHighGoalLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(teleopHighGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+              .add(teleopJPanelLayout.createSequentialGroup()
+                .add(teleopMiddleGoalLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(teleopMiddleGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+              .add(teleopJPanelLayout.createSequentialGroup()
+                .add(teleopLowGoalLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(teleopLowGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+              .add(teleopJPanelLayout.createSequentialGroup()
+                .add(teleopFrisbeesShotLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(teleopFrisbeesShotInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+              .add(teleopJPanelLayout.createSequentialGroup()
+                .add(teleopPyramidGoalLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(teleopPyramidGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+            .add(0, 52, Short.MAX_VALUE))
+          .add(org.jdesktop.layout.GroupLayout.TRAILING, teleopJPanelLayout.createSequentialGroup()
+            .add(teleopClimbLabel)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(teleopHighGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(teleopJPanelLayout.createSequentialGroup()
-            .add(teleopMiddleGoalLabel)
+            .add(teleopClimbNoButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(teleopMiddleGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(teleopJPanelLayout.createSequentialGroup()
-            .add(teleopLowGoalLabel)
+            .add(teleopClimb10Button, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(teleopLowGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(teleopJPanelLayout.createSequentialGroup()
-            .add(teleopFrisbeesShotLabel)
+            .add(teleopClimb20Button, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(teleopFrisbeesShotInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(teleopJPanelLayout.createSequentialGroup()
-            .add(teleopPyramidGoalLabel)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(teleopPyramidGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap(58, Short.MAX_VALUE))
+            .add(teleopClimb30Button, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(0, 0, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     teleopJPanelLayout.setVerticalGroup(
       teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -202,7 +244,14 @@ public class TeamInputPanel extends JPanel
         .add(teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(teleopFrisbeesShotLabel)
           .add(teleopFrisbeesShotInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .add(31, 31, 31))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(teleopClimbNoButton)
+          .add(teleopClimbLabel)
+          .add(teleopClimb10Button)
+          .add(teleopClimb20Button)
+          .add(teleopClimb30Button))
+        .addContainerGap())
     );
 
     tabbedPanel.addTab("Tele-Op / End Game", teleopJPanel);
@@ -280,12 +329,17 @@ public class TeamInputPanel extends JPanel
     return 0;
   }
   
-  public int getAutoScore2()
+  public int getMainScore()
   {
     return 0;
   }
   
-  public int getAutoScore3()
+  public int getPyramidAttempt()
+  {
+    return 0;
+  }
+  
+  public int getPyramidScore()
   {
     return 0;
   }
@@ -293,6 +347,7 @@ public class TeamInputPanel extends JPanel
   public void setBorderColor(Color color)
   {
     borderColor = color;
+    setBorder(new javax.swing.border.LineBorder(borderColor, borderThickness, true));
   }
   
   // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -314,6 +369,11 @@ public class TeamInputPanel extends JPanel
   private javax.swing.JTabbedPane tabbedPanel;
   private javax.swing.JTextField teamInput;
   private javax.swing.JLabel teamLabel;
+  private javax.swing.JRadioButton teleopClimb10Button;
+  private javax.swing.JRadioButton teleopClimb20Button;
+  private javax.swing.JRadioButton teleopClimb30Button;
+  private javax.swing.JLabel teleopClimbLabel;
+  private javax.swing.JRadioButton teleopClimbNoButton;
   private javax.swing.JTextField teleopFrisbeesShotInput;
   private javax.swing.JLabel teleopFrisbeesShotLabel;
   private javax.swing.JTextField teleopHighGoalInput;

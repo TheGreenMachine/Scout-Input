@@ -1,5 +1,7 @@
 package org.edinarobotics.scouting;
 
+import org.edinarobotics.scouting.gui.DataInputFrame;
+
 /**
  *
  * @author aoneill
@@ -11,6 +13,6 @@ public class Main {
    */
   public static void main(String[] args) 
   {
-    
+    new DataInputFrame();
   }
 }
