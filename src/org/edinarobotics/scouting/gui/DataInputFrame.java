@@ -64,6 +64,7 @@ public class DataInputFrame extends javax.swing.JFrame
     scoutButton = new javax.swing.JButton();
     menuBar = new javax.swing.JMenuBar();
     fileMenu = new javax.swing.JMenu();
+    testDataOption = new javax.swing.JMenuItem();
     editMenu = new javax.swing.JMenu();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,6 +83,15 @@ public class DataInputFrame extends javax.swing.JFrame
     });
 
     fileMenu.setText("File");
+
+    testDataOption.setText("Test Data Entry");
+    testDataOption.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        testDataOptionActionPerformed(evt);
+      }
+    });
+    fileMenu.add(testDataOption);
+
     menuBar.add(fileMenu);
 
     editMenu.setText("Edit");
@@ -182,10 +192,21 @@ public class DataInputFrame extends javax.swing.JFrame
         return;
       }
     
-    if(!isValidMatchInfo())
+    if(!isValidTeamsData(teams))
+    {
+      JOptionPane.showMessageDialog(this, 
+                "Duplicate Teams!", 
+                "Error!", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    if(!isValidMatchData())
+    {
       JOptionPane.showMessageDialog(this, 
                 "Error in Match data!", 
                 "Error!", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
     
     MatchData match = new MatchData(
             Integer.parseInt(matchInput.getText()),
@@ -195,12 +216,36 @@ public class DataInputFrame extends javax.swing.JFrame
             Integer.parseInt(redMatchScoreInput.getText()));
   }//GEN-LAST:event_scoutButtonActionPerformed
 
-  private boolean isValidMatchInfo()
+  private void testDataOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testDataOptionActionPerformed
+    // TODO add your handling code here:
+    
+  }//GEN-LAST:event_testDataOptionActionPerformed
+
+  private boolean isValidMatchData()
   {
     if(matchInput.getText().equals("") || 
             blueMatchScoreInput.getText().equals("") ||
             redMatchScoreInput.getText().equals(""))
       return false;
+    
+    return true;
+  }
+  
+  private boolean isValidTeamsData(TeamData[] teams)
+  {
+    ArrayList<Integer> teamList = new ArrayList();
+    teamList.add(teams[0].teamNum);
+    teamList.add(teams[1].teamNum);
+    teamList.add(teams[2].teamNum);
+    teamList.add(teams[3].teamNum);
+    teamList.add(teams[4].teamNum);
+    teamList.add(teams[5].teamNum);
+    
+    for(int i = 0; i < teamList.size(); i++)
+      for(int j = 0; j < teamList.size(); j++)
+        if(j != i)
+          if(teamList.get(i) == teamList.get(j))
+            return false;
     
     return true;
   }
@@ -222,5 +267,6 @@ public class DataInputFrame extends javax.swing.JFrame
   private org.edinarobotics.scouting.gui.TeamInputPanel teamInputPanel4;
   private org.edinarobotics.scouting.gui.TeamInputPanel teamInputPanel5;
   private org.edinarobotics.scouting.gui.TeamInputPanel teamInputPanel6;
+  private javax.swing.JMenuItem testDataOption;
   // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,6 @@
 package org.edinarobotics.scouting;
 
+import org.edinarobotics.scouting.gui.DataInputFrame;
 import org.edinarobotics.scouting.output.DefaultWorkspace;
 
 /**
@@ -11,9 +12,11 @@ public class Main {
   /**
    * @param args the command line arguments
    */
+  @SuppressWarnings("ResultOfObjectAllocationIgnored")
   public static void main(String[] args) 
   {
     //DataInputFrame dataInputFrame = new DataInputFrame();
-    DefaultWorkspace dw = new DefaultWorkspace();
+    new DefaultWorkspace();
+    new DataInputFrame();
   }
 }

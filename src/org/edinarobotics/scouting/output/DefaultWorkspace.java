@@ -22,10 +22,22 @@ public class DefaultWorkspace
   {
     try
     {
-      new File(location + imagesDirPath).mkdir();
-      new File(location + matchesDirPath).mkdir();
-      new File(location + teamsDirPath).mkdir();
-      new File(location + teamListFile).createNewFile();
+      File imagesDir = new File(location + imagesDirPath);
+      File matchesDir = new File(location + matchesDirPath);
+      File teamsDir = new File(location + teamsDirPath);
+      File teamList = new File(location + teamListFile);
+      
+      if(!(imagesDir.exists() && imagesDir.isDirectory()))
+        imagesDir.mkdir();
+      
+      if(!(matchesDir.exists() && matchesDir.isDirectory()))
+        matchesDir.mkdir();
+      
+      if(!(teamsDir.exists() && teamsDir.isDirectory()))
+        teamsDir.mkdir();
+      
+      if(!(teamList.exists() && teamList.isFile()))
+        teamList.mkdir();
     }
     catch(Exception e) 
     {
