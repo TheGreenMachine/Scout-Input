@@ -1,6 +1,5 @@
 package org.edinarobotics.scouting;
 
-import org.edinarobotics.scouting.gui.DataInputFrame;
 import org.edinarobotics.scouting.output.DefaultWorkspace;
 
 /**

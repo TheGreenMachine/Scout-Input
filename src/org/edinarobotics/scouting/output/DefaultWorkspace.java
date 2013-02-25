@@ -1,6 +1,5 @@
 package org.edinarobotics.scouting.output;
 
-import java.awt.Component;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
