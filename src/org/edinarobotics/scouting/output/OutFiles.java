@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.edinarobotics.scouting.output;
 
 import org.edinarobotics.scouting.datatypes.MatchData;
@@ -14,9 +10,18 @@ import org.edinarobotics.scouting.datatypes.TeamData;
 public class OutFiles
 {
   public static String extension = ".csv";
+  public static String separator = "|";
   
+  @SuppressWarnings("ResultOfObjectAllocationIgnored")
   public OutFiles(TeamData[] teams, MatchData match)
   {
+    new MatchFileOut(match);
+    
+    for(TeamData team : teams)
+    {
+      new TeamFileOut(team, match);
+      new CommentFileOut(team);
+    }
     
   }
 }

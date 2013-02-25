@@ -13,6 +13,8 @@ public class TeamData
   public int teleopScore;
   public int pyramidAttempt;
   public int pyramidScore;
+  public String penalties;
+  public String comments;
   
   private boolean valid;
   
@@ -23,6 +25,8 @@ public class TeamData
     this.teleopScore = panel.getTeleOpScore();
     this.pyramidAttempt = panel.getPyramidAttempt();
     this.pyramidScore = panel.getPyramidScore();
+    this.penalties = panel.getPenalties();
+    this.comments = panel.getComments();
     
     this.valid = panel.isValidData();
   }

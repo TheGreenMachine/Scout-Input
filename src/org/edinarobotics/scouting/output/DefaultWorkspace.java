@@ -14,6 +14,7 @@ public class DefaultWorkspace
   public static String imagesDirPath = "/images";
   public static String matchesDirPath = "/matches";
   public static String teamsDirPath = "/teams";
+  public static String commentsDirPath = "/comments";
   public static String teamListFile = "/TeamList.txt";
   
   public static String location = System.getProperty("user.dir");

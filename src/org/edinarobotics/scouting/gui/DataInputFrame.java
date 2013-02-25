@@ -189,7 +189,9 @@ public class DataInputFrame extends javax.swing.JFrame
     
     MatchData match = new MatchData(
             Integer.parseInt(matchInput.getText()),
+            teams[0].teamNum, teams[1].teamNum, teams[2].teamNum, 
             Integer.parseInt(blueMatchScoreInput.getText()),
+            teams[3].teamNum, teams[4].teamNum, teams[5].teamNum, 
             Integer.parseInt(redMatchScoreInput.getText()));
   }//GEN-LAST:event_scoutButtonActionPerformed
 

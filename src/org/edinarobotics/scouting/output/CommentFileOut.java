@@ -7,20 +7,22 @@ import java.util.Formatter;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.edinarobotics.scouting.datatypes.MatchData;
 import org.edinarobotics.scouting.datatypes.TeamData;
 
 /**
  *
  * @author aoneill
  */
-public class TeamFileOut
+public class CommentFileOut 
 {
   private static String folderPath = 
-          DefaultWorkspace.location + DefaultWorkspace.teamsDirPath;
+          DefaultWorkspace.location + DefaultWorkspace.commentsDirPath;
   
-  public TeamFileOut(TeamData team, MatchData match)
-  { 
+  public CommentFileOut(TeamData team)
+  {
+    if(team.comments.equals(""))
+      return;
+    
     String path = folderPath + "/" + String.valueOf(team.teamNum) + OutFiles.extension;
     
     File out = new File(path);
@@ -32,7 +34,7 @@ public class TeamFileOut
       catch (Exception e)
       {
         JOptionPane.showMessageDialog(new JPanel(), 
-                "Could not generate Team File!", 
+                "Could not generate Comment File!", 
                 "Error!", JOptionPane.ERROR_MESSAGE);
         return;
       }
@@ -45,7 +47,7 @@ public class TeamFileOut
     catch (FileNotFoundException ex)
     {
       JOptionPane.showMessageDialog(new JPanel(), 
-                "Could not open the Team File!", 
+                "Could not open the Comment File!", 
                 "Error!", JOptionPane.ERROR_MESSAGE);
       return;
     }
@@ -56,13 +58,7 @@ public class TeamFileOut
     scan.close();
     
     String insertLine = String.format(
-            "%s%s%d%s%d%s%d%s%d%s%d%s",
-            match.matchNum, OutFiles.separator, 
-            team.autoScore, OutFiles.separator,
-            team.teleopScore, OutFiles.separator,
-            team.pyramidAttempt, OutFiles.separator,
-            team.pyramidScore, OutFiles.separator,
-            team.penalties);
+            "<pre>%s</pre>", team.comments);
     
     fileContent.add(insertLine);
     
@@ -74,7 +70,7 @@ public class TeamFileOut
     catch (FileNotFoundException ex) 
     {
       JOptionPane.showMessageDialog(new JPanel(), 
-                "Could not open the Team File!", 
+                "Could not open the Comment File!", 
                 "Error!", JOptionPane.ERROR_MESSAGE);
       return;
     }
