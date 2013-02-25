@@ -1,6 +1,9 @@
 package org.edinarobotics.scouting.gui;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import org.edinarobotics.scouting.datatypes.MatchData;
+import org.edinarobotics.scouting.datatypes.TeamData;
 
 /**
  *
@@ -11,11 +14,29 @@ public class DataInputFrame extends javax.swing.JFrame
   private static String MATCH_NUMBER_LABEL_TEXT = "Match:";
   private static String BLUE_MATCH_SCORE_LABEL_TEXT = "Blue Alliance Score:";
   private static String RED_MATCH_SCORE_LABEL_TEXT = "Red Alliance Score:";
+  
+  private static String[] teamInputIndex = new String[] 
+    {"[Top, Left]", "[Top, Middle]", "[Top, Right]",
+     "[Bottom, Left]","[Bottom, Middle]", "[Bottom, Right]"};
   /**
    * Creates new form DataInputFrame
    */
   public DataInputFrame() {
     initComponents();
+    
+    ArrayList<String> teams = new ArrayList();
+    teams.add("1816");
+    teams.add("2052");
+    teams.add("2169");
+    teams.add("4511");
+    
+    teamInputPanel1.setTeamList(teams);
+    teamInputPanel2.setTeamList(teams);
+    teamInputPanel3.setTeamList(teams);
+    teamInputPanel4.setTeamList(teams);
+    teamInputPanel5.setTeamList(teams);
+    teamInputPanel6.setTeamList(teams);
+    
     setVisible(true);
   }
 
@@ -140,16 +161,48 @@ public class DataInputFrame extends javax.swing.JFrame
   }// </editor-fold>//GEN-END:initComponents
 
   private void scoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoutButtonActionPerformed
-    String[][] data = new String[6][7];
+    TeamData[] teams = new TeamData[] {
+      new TeamData(teamInputPanel1),
+      new TeamData(teamInputPanel2),
+      new TeamData(teamInputPanel3),
+      new TeamData(teamInputPanel4),
+      new TeamData(teamInputPanel5),
+      new TeamData(teamInputPanel6)};
     
-    data[0][0] = 
-    data[1][0] = 
-    data[2][0] = 
-    data[3][0] = 
-    data[4][0] = 
-    data[5][0] = 
+    for(int i = 0; i < 6; i++)
+      if(!teams[i].isValidData())
+      {
+        String id = String.valueOf(teams[i].teamNum);
+        if(id.equals("0"))
+          id = teamInputIndex[i];
+        
+        JOptionPane.showMessageDialog(this, 
+                "Error in Team " + id + "'s data!", 
+                "Error!", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
+    
+    if(!isValidMatchInfo())
+      JOptionPane.showMessageDialog(this, 
+                "Error in Match data!", 
+                "Error!", JOptionPane.ERROR_MESSAGE);
+    
+    MatchData match = new MatchData(
+            Integer.parseInt(matchInput.getText()),
+            Integer.parseInt(blueMatchScoreInput.getText()),
+            Integer.parseInt(redMatchScoreInput.getText()));
   }//GEN-LAST:event_scoutButtonActionPerformed
 
+  private boolean isValidMatchInfo()
+  {
+    if(matchInput.getText().equals("") || 
+            blueMatchScoreInput.getText().equals("") ||
+            redMatchScoreInput.getText().equals(""))
+      return false;
+    
+    return true;
+  }
+  
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTextField blueMatchScoreInput;
   private javax.swing.JLabel blueMatchScoreLabel;

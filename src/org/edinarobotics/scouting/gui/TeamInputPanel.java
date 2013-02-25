@@ -42,7 +42,6 @@ public class TeamInputPanel extends JPanel
   private static int CLIMB_MIDDLE = 20;
   private static int CLIMB_BOTTOM = 10;
   
- 
   private static int borderThickness = 4; 
   private Color borderColor = Color.GRAY;
   
@@ -354,21 +353,24 @@ public class TeamInputPanel extends JPanel
     easterEgg();
   }//GEN-LAST:event_teamComboBoxActionPerformed
 
-  public int getAutoScore()
+  public int getTeamNumber()
   {
-    int score = 0;
     try
     {
-      score += textFieldToScore(autoHighGoalInput.getText()) * GOAL_UPPER * AUTO_GOAL_MULTIPLIER;
-      score += textFieldToScore(autoMiddleGoalInput.getText()) * GOAL_MIDDLE * AUTO_GOAL_MULTIPLIER;
-      score += textFieldToScore(autoLowGoalInput.getText()) * GOAL_LOW * AUTO_GOAL_MULTIPLIER;
+      return Integer.parseInt(teamComboBox.getSelectedItem().toString());
     }
     catch (Exception e)
     {
-      JOptionPane.showMessageDialog(this, 
-              "Error in Autonomous for Team " + 
-              teamComboBox.getSelectedItem().toString());
+      return 0;
     }
+  }
+  
+  public int getAutoScore()
+  {
+    int score = 0;
+    score += textFieldToScore(autoHighGoalInput.getText()) * GOAL_UPPER * AUTO_GOAL_MULTIPLIER;
+    score += textFieldToScore(autoMiddleGoalInput.getText()) * GOAL_MIDDLE * AUTO_GOAL_MULTIPLIER;
+    score += textFieldToScore(autoLowGoalInput.getText()) * GOAL_LOW * AUTO_GOAL_MULTIPLIER;
     
     return score;
   }
@@ -378,26 +380,17 @@ public class TeamInputPanel extends JPanel
     return textFieldToScore(autoFrisbeesShotInput.getText());
   }
   
-  public int getMainScore()
+  public int getTeleOpScore()
   {
     int score = 0;
-    try
-    {
-      score += textFieldToScore(teleopHighGoalInput.getText()) * GOAL_UPPER;
-      score += textFieldToScore(teleopMiddleGoalInput.getText()) * GOAL_MIDDLE;
-      score += textFieldToScore(teleopLowGoalInput.getText()) * GOAL_LOW;
-    }
-    catch (Exception e)
-    {
-      JOptionPane.showMessageDialog(this, 
-              "Error in Tele-Op / End Game for Team " + 
-              teamComboBox.getSelectedItem().toString());
-    }
-    
+    score += textFieldToScore(teleopHighGoalInput.getText()) * GOAL_UPPER;
+    score += textFieldToScore(teleopMiddleGoalInput.getText()) * GOAL_MIDDLE;
+    score += textFieldToScore(teleopLowGoalInput.getText()) * GOAL_LOW;
+      
     return score;
   }
   
-  public int getMainGameShots()
+  public int getTeleOpGameShots()
   {
     return textFieldToScore(teleopFrisbeesShotInput.getText());
   }
@@ -421,17 +414,7 @@ public class TeamInputPanel extends JPanel
     score *= teleopClimbButtonGroup.isSelected(teleopClimbNoButton.getModel()) ?
             0 : 1;
     
-    if((getPyramidAttempt() == 1) && score > 0)
-    {
-      return score;
-    }
-    else
-    {
-      JOptionPane.showMessageDialog(this, 
-              "Error in Pyramid Score for Team " + 
-              teamComboBox.getSelectedItem().toString());
-      return 0;
-    }
+    return score;
   }
   
   public String getPenalties()
@@ -452,8 +435,9 @@ public class TeamInputPanel extends JPanel
   
   public void setTeamList(ArrayList<String> list)
   {
-    list.add(TEAM_LIST_DEFAULT_TEXT);
-    setTeamList(list.toArray(new String[0]));
+    ArrayList<String> clone = (ArrayList<String>) list.clone();
+    clone.add(0, TEAM_LIST_DEFAULT_TEXT);
+    setTeamList(clone.toArray(new String[0]));
   }
   
   private void setTeamList(String[] list)
@@ -461,6 +445,14 @@ public class TeamInputPanel extends JPanel
     teamList = list;
     teamComboBox.setModel(new javax.swing.DefaultComboBoxModel(teamList));
     easterEgg();
+  }
+  
+  public boolean isValidData()
+  {
+    if(teamComboBox.getSelectedItem().toString().equals(TEAM_LIST_DEFAULT_TEXT))
+      return false;
+    
+    return true;
   }
   
   private int textFieldToScore(String s)
