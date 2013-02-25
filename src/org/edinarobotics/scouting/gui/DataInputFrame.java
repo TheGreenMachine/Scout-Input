@@ -28,7 +28,9 @@ public class DataInputFrame extends javax.swing.JFrame
     teams.add("1816");
     teams.add("2052");
     teams.add("2169");
-    teams.add("4511");
+    teams.add("2500");
+    teams.add("2512");
+    teams.add("1714");
     
     teamInputPanel1.setTeamList(teams);
     teamInputPanel2.setTeamList(teams);
@@ -244,7 +246,7 @@ public class DataInputFrame extends javax.swing.JFrame
     for(int i = 0; i < teamList.size(); i++)
       for(int j = 0; j < teamList.size(); j++)
         if(j != i)
-          if(teamList.get(i) == teamList.get(j))
+          if(teamList.get(i).equals(teamList.get(j)))
             return false;
     
     return true;
