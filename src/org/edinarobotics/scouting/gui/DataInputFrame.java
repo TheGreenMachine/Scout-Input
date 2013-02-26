@@ -220,7 +220,12 @@ public class DataInputFrame extends javax.swing.JFrame
 
   private void testDataOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testDataOptionActionPerformed
     // TODO add your handling code here:
-    
+    teamInputPanel1.setRandomData();
+    teamInputPanel2.setRandomData();
+    teamInputPanel3.setRandomData();
+    teamInputPanel4.setRandomData();
+    teamInputPanel5.setRandomData();
+    teamInputPanel6.setRandomData();
   }//GEN-LAST:event_testDataOptionActionPerformed
 
   private boolean isValidMatchData()

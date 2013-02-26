@@ -2,7 +2,9 @@ package org.edinarobotics.scouting.gui;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JPanel;
+import org.edinarobotics.scouting.datatypes.RandomData;
 
 /**
  *
@@ -29,6 +31,7 @@ public class TeamInputPanel extends JPanel
   private static String FRISBEES_SHOT_LABEL_TEXT = "Frisbees Shot:";
   
   private static int AUTO_GOAL_MULTIPLIER = 2;
+  private static int GOAL_PYRAMID = 5;
   private static int GOAL_UPPER = 3;
   private static int GOAL_MIDDLE = 2;
   private static int GOAL_LOW = 1;
@@ -40,7 +43,7 @@ public class TeamInputPanel extends JPanel
   private static int borderThickness = 4; 
   private Color borderColor = Color.GRAY;
   
-  private String[] teamList = {};
+  public static String[] teamList = {};
   
   /**
    * Creates new form NewJPanel
@@ -378,6 +381,7 @@ public class TeamInputPanel extends JPanel
   public int getTeleOpScore()
   {
     int score = 0;
+    score += textFieldToScore(teleopPyramidGoalInput.getText()) + GOAL_PYRAMID;
     score += textFieldToScore(teleopHighGoalInput.getText()) * GOAL_UPPER;
     score += textFieldToScore(teleopMiddleGoalInput.getText()) * GOAL_MIDDLE;
     score += textFieldToScore(teleopLowGoalInput.getText()) * GOAL_LOW;
@@ -430,16 +434,41 @@ public class TeamInputPanel extends JPanel
   
   public void setTeamList(ArrayList<String> list)
   {
-    ArrayList<String> clone = (ArrayList<String>) list.clone();
-    clone.add(0, TEAM_LIST_DEFAULT_TEXT);
-    setTeamList(clone.toArray(new String[0]));
+    setTeamList(list.toArray(new String[0]));
   }
   
   private void setTeamList(String[] list)
   {
     teamList = list;
-    teamComboBox.setModel(new javax.swing.DefaultComboBoxModel(teamList));
+    
+    ArrayList<String> clone = new ArrayList(Arrays.asList(list));
+    clone.add(0, TEAM_LIST_DEFAULT_TEXT);
+    teamComboBox.setModel(new javax.swing.DefaultComboBoxModel(clone.toArray(new String[0])));
     easterEgg();
+  }
+  
+  public void setRandomData()
+  {
+    RandomData random = new RandomData();
+    
+    ArrayList<String> clone = new ArrayList(Arrays.asList(teamList));
+    teamComboBox.setSelectedIndex(clone.indexOf(String.valueOf(random.teamNum)));
+    
+    autoHighGoalInput.setText(String.valueOf(random.autoHighGoal));
+    autoMiddleGoalInput.setText(String.valueOf(random.autoMiddleGoal));
+    autoLowGoalInput.setText(String.valueOf(random.autoLowGoal));
+    autoFrisbeesShotInput.setText(String.valueOf(random.autoFrisbeesShot));
+    
+    teleopPyramidGoalInput.setText(String.valueOf(random.teleopPyramidGoal));
+    teleopHighGoalInput.setText(String.valueOf(random.teleopHighGoal));
+    teleopMiddleGoalInput.setText(String.valueOf(random.teleopMiddleGoal));
+    teleopLowGoalInput.setText(String.valueOf(random.teleopLowGoal));
+    teleopFrisbeesShotInput.setText(String.valueOf(random.teleopFrisbeesShot));
+    
+    teleopClimbNoButton.setSelected(random.teleopPyramdidNo);
+    teleopClimb10Button.setSelected(random.teleopPyramdid10);
+    teleopClimb20Button.setSelected(random.teleopPyramdid20);
+    teleopClimb30Button.setSelected(random.teleopPyramdid30);
   }
   
   public boolean isValidData()
