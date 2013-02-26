@@ -14,7 +14,8 @@ public class DefaultWorkspace
   public static String matchesDirPath = "/matches";
   public static String teamsDirPath = "/teams";
   public static String commentsDirPath = "/comments";
-  public static String teamListFile = "/TeamList.txt";
+  public static String teamListFile = "/TeamList" + OutFiles.extension;
+  public static String matchFillerFile = "/MatchFiller" + OutFiles.extension;
   
   public static String location = System.getProperty("user.dir");
   
@@ -26,6 +27,7 @@ public class DefaultWorkspace
       File matchesDir = new File(location + matchesDirPath);
       File teamsDir = new File(location + teamsDirPath);
       File teamList = new File(location + teamListFile);
+      File matchFiller = new File(location + matchFillerFile);
       
       if(!(imagesDir.exists() && imagesDir.isDirectory()))
         imagesDir.mkdir();
@@ -37,7 +39,10 @@ public class DefaultWorkspace
         teamsDir.mkdir();
       
       if(!(teamList.exists() && teamList.isFile()))
-        teamList.mkdir();
+        teamList.createNewFile();
+      
+      if(!(matchFiller.exists() && matchFiller.isFile()))
+        matchFiller.createNewFile();
     }
     catch(Exception e) 
     {

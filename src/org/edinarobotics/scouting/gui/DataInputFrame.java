@@ -1,9 +1,13 @@
 package org.edinarobotics.scouting.gui;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.edinarobotics.scouting.datatypes.MatchData;
 import org.edinarobotics.scouting.datatypes.TeamData;
+import org.edinarobotics.scouting.input.MatchFillerInput;
+import org.edinarobotics.scouting.input.TeamListInput;
+import org.edinarobotics.scouting.output.OutFiles;
 
 /**
  *
@@ -24,21 +28,21 @@ public class DataInputFrame extends javax.swing.JFrame
   public DataInputFrame() {
     initComponents();
     
-    ArrayList<String> teams = new ArrayList();
-    teams.add("1816");
-    teams.add("2052");
-    teams.add("2169");
-    teams.add("2500");
-    teams.add("2512");
-    teams.add("1714");
+    teamInputPanel1.setBorderColor(Color.BLUE);
+    teamInputPanel2.setBorderColor(Color.BLUE);
+    teamInputPanel3.setBorderColor(Color.BLUE);
+    teamInputPanel4.setBorderColor(Color.RED);
+    teamInputPanel5.setBorderColor(Color.RED);
+    teamInputPanel6.setBorderColor(Color.RED);
     
-    teamInputPanel1.setTeamList(teams);
-    teamInputPanel2.setTeamList(teams);
-    teamInputPanel3.setTeamList(teams);
-    teamInputPanel4.setTeamList(teams);
-    teamInputPanel5.setTeamList(teams);
-    teamInputPanel6.setTeamList(teams);
-    
+    TeamListInput teamListIn = new TeamListInput();
+    teamInputPanel1.setTeamList(teamListIn.getTeamList());
+    teamInputPanel2.setTeamList(teamListIn.getTeamList());
+    teamInputPanel3.setTeamList(teamListIn.getTeamList());
+    teamInputPanel4.setTeamList(teamListIn.getTeamList());
+    teamInputPanel5.setTeamList(teamListIn.getTeamList());
+    teamInputPanel6.setTeamList(teamListIn.getTeamList());
+
     setVisible(true);
   }
 
@@ -66,6 +70,7 @@ public class DataInputFrame extends javax.swing.JFrame
     scoutButton = new javax.swing.JButton();
     menuBar = new javax.swing.JMenuBar();
     fileMenu = new javax.swing.JMenu();
+    clearOption = new javax.swing.JMenuItem();
     testDataOption = new javax.swing.JMenuItem();
     editMenu = new javax.swing.JMenu();
 
@@ -85,6 +90,14 @@ public class DataInputFrame extends javax.swing.JFrame
     });
 
     fileMenu.setText("File");
+
+    clearOption.setText("Clear Data");
+    clearOption.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        clearOptionActionPerformed(evt);
+      }
+    });
+    fileMenu.add(clearOption);
 
     testDataOption.setText("Test Data Entry");
     testDataOption.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +185,7 @@ public class DataInputFrame extends javax.swing.JFrame
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+  @SuppressWarnings("ResultOfObjectAllocationIgnored")
   private void scoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoutButtonActionPerformed
     TeamData[] teams = new TeamData[] {
       new TeamData(teamInputPanel1),
@@ -216,17 +230,58 @@ public class DataInputFrame extends javax.swing.JFrame
             Integer.parseInt(blueMatchScoreInput.getText()),
             teams[3].teamNum, teams[4].teamNum, teams[5].teamNum, 
             Integer.parseInt(redMatchScoreInput.getText()));
+    
+    new OutFiles(teams, match);
+    
+    MatchFillerInput matchFillerIn = new MatchFillerInput();
+    
+    teamInputPanel1.clear(matchFillerIn.getTeams(match.matchNum + 1, 0));
+    teamInputPanel2.clear(matchFillerIn.getTeams(match.matchNum + 1, 1));
+    teamInputPanel3.clear(matchFillerIn.getTeams(match.matchNum + 1, 2));
+    teamInputPanel4.clear(matchFillerIn.getTeams(match.matchNum + 1, 3));
+    teamInputPanel5.clear(matchFillerIn.getTeams(match.matchNum + 1, 4));
+    teamInputPanel6.clear(matchFillerIn.getTeams(match.matchNum + 1, 5));
+    
+    matchInput.setText(String.valueOf(Integer.parseInt(matchInput.getText()) + 1));
+    blueMatchScoreInput.setText(null);
+    redMatchScoreInput.setText(null);
   }//GEN-LAST:event_scoutButtonActionPerformed
 
   private void testDataOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testDataOptionActionPerformed
     // TODO add your handling code here:
-    teamInputPanel1.setRandomData();
-    teamInputPanel2.setRandomData();
-    teamInputPanel3.setRandomData();
-    teamInputPanel4.setRandomData();
-    teamInputPanel5.setRandomData();
-    teamInputPanel6.setRandomData();
+    TeamData[] teams;
+    do
+    {
+      teamInputPanel1.setRandomData();
+      teamInputPanel2.setRandomData();
+      teamInputPanel3.setRandomData();
+      teamInputPanel4.setRandomData();
+      teamInputPanel5.setRandomData();
+      teamInputPanel6.setRandomData();
+      
+      teams = new TeamData[] {
+      new TeamData(teamInputPanel1),
+      new TeamData(teamInputPanel2),
+      new TeamData(teamInputPanel3),
+      new TeamData(teamInputPanel4),
+      new TeamData(teamInputPanel5),
+      new TeamData(teamInputPanel6)};
+    } while(!isValidTeamsData(teams));
   }//GEN-LAST:event_testDataOptionActionPerformed
+
+  private void clearOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOptionActionPerformed
+    // TODO add your handling code here:
+    teamInputPanel1.clear("");
+    teamInputPanel2.clear("");
+    teamInputPanel3.clear("");
+    teamInputPanel4.clear("");
+    teamInputPanel5.clear("");
+    teamInputPanel6.clear("");
+    
+    matchInput.setText("");
+    blueMatchScoreInput.setText(null);
+    redMatchScoreInput.setText(null);
+  }//GEN-LAST:event_clearOptionActionPerformed
 
   private boolean isValidMatchData()
   {
@@ -257,9 +312,20 @@ public class DataInputFrame extends javax.swing.JFrame
     return true;
   }
   
+  private void clear()
+  {
+    matchInput.setText(
+            matchInput.getText().equals("") ?
+            String.valueOf(Integer.parseInt(matchInput.getText()) + 1) :
+            "");
+    blueMatchScoreInput.setText(null);
+    redMatchScoreInput.setText(null);
+  }
+  
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTextField blueMatchScoreInput;
   private javax.swing.JLabel blueMatchScoreLabel;
+  private javax.swing.JMenuItem clearOption;
   private javax.swing.JMenu editMenu;
   private javax.swing.JMenu fileMenu;
   private javax.swing.JTextField matchInput;

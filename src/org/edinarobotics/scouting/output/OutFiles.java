@@ -9,7 +9,7 @@ import org.edinarobotics.scouting.datatypes.TeamData;
  */
 public class OutFiles
 {
-  public static String extension = ".csv";
+  public static String extension = ".txt";
   public static String separator = "|";
   
   @SuppressWarnings("ResultOfObjectAllocationIgnored")

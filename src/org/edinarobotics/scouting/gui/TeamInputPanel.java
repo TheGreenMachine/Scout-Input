@@ -28,8 +28,6 @@ public class TeamInputPanel extends JPanel
   private static String PYRAMID_CLIMB_BOTTOM_LABEL_TEXT = "10";
   private static String PYRAMID_NO_CLIMB_LABEL_TEXT = "No";
   
-  private static String FRISBEES_SHOT_LABEL_TEXT = "Frisbees Shot:";
-  
   private static int AUTO_GOAL_MULTIPLIER = 2;
   private static int GOAL_PYRAMID = 5;
   private static int GOAL_UPPER = 3;
@@ -71,8 +69,6 @@ public class TeamInputPanel extends JPanel
     autoMiddleGoalInput = new javax.swing.JTextField();
     autoLowGoalLabel = new javax.swing.JLabel();
     autoLowGoalInput = new javax.swing.JTextField();
-    autoFrisbeesShotLabel = new javax.swing.JLabel();
-    autoFrisbeesShotInput = new javax.swing.JTextField();
     teleopJPanel = new javax.swing.JPanel();
     teleopHighGoalInput = new javax.swing.JTextField();
     teleopHighGoalLabel = new javax.swing.JLabel();
@@ -80,8 +76,6 @@ public class TeamInputPanel extends JPanel
     teleopMiddleGoalInput = new javax.swing.JTextField();
     teleopLowGoalInput = new javax.swing.JTextField();
     teleopLowGoalLabel = new javax.swing.JLabel();
-    teleopFrisbeesShotLabel = new javax.swing.JLabel();
-    teleopFrisbeesShotInput = new javax.swing.JTextField();
     teleopPyramidGoalLabel = new javax.swing.JLabel();
     teleopPyramidGoalInput = new javax.swing.JTextField();
     teleopClimbLabel = new javax.swing.JLabel();
@@ -110,14 +104,12 @@ public class TeamInputPanel extends JPanel
 
     autoLowGoalLabel.setText(LOW_GOAL_LABEL_TEXT);
 
-    autoFrisbeesShotLabel.setText(FRISBEES_SHOT_LABEL_TEXT);
-
     org.jdesktop.layout.GroupLayout autoJPanelLayout = new org.jdesktop.layout.GroupLayout(autoJPanel);
     autoJPanel.setLayout(autoJPanelLayout);
     autoJPanelLayout.setHorizontalGroup(
       autoJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(autoJPanelLayout.createSequentialGroup()
-        .addContainerGap(57, Short.MAX_VALUE)
+        .add(57, 57, 57)
         .add(autoJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(autoJPanelLayout.createSequentialGroup()
             .add(autoHighGoalLabel)
@@ -130,12 +122,8 @@ public class TeamInputPanel extends JPanel
           .add(autoJPanelLayout.createSequentialGroup()
             .add(autoLowGoalLabel)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(autoLowGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-          .add(autoJPanelLayout.createSequentialGroup()
-            .add(autoFrisbeesShotLabel)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(autoFrisbeesShotInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap(58, Short.MAX_VALUE))
+            .add(autoLowGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+        .addContainerGap(59, Short.MAX_VALUE))
     );
     autoJPanelLayout.setVerticalGroup(
       autoJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -152,11 +140,7 @@ public class TeamInputPanel extends JPanel
         .add(autoJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(autoLowGoalLabel)
           .add(autoLowGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .add(9, 9, 9)
-        .add(autoJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(autoFrisbeesShotLabel)
-          .add(autoFrisbeesShotInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .add(62, 62, 62))
+        .add(99, 99, 99))
     );
 
     tabbedPanel.addTab("Autonomous", autoJPanel);
@@ -166,8 +150,6 @@ public class TeamInputPanel extends JPanel
     teleopMiddleGoalLabel.setText(MIDDLE_GOAL_LABEL_TEXT);
 
     teleopLowGoalLabel.setText(LOW_GOAL_LABEL_TEXT);
-
-    teleopFrisbeesShotLabel.setText(FRISBEES_SHOT_LABEL_TEXT);
 
     teleopPyramidGoalLabel.setText(PYRAMID_GOAL_LABEL_TEXT);
 
@@ -214,10 +196,6 @@ public class TeamInputPanel extends JPanel
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(teleopLowGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
               .add(teleopJPanelLayout.createSequentialGroup()
-                .add(teleopFrisbeesShotLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(teleopFrisbeesShotInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-              .add(teleopJPanelLayout.createSequentialGroup()
                 .add(teleopPyramidGoalLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(teleopPyramidGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
@@ -252,18 +230,14 @@ public class TeamInputPanel extends JPanel
         .add(teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(teleopLowGoalLabel)
           .add(teleopLowGoalInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .add(9, 9, 9)
-        .add(teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(teleopFrisbeesShotLabel)
-          .add(teleopFrisbeesShotInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(12, 12, 12)
         .add(teleopJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(teleopClimbNoButton)
           .add(teleopClimbLabel)
           .add(teleopClimb10Button)
           .add(teleopClimb20Button)
           .add(teleopClimb30Button))
-        .addContainerGap())
+        .addContainerGap(51, Short.MAX_VALUE))
     );
 
     tabbedPanel.addTab("Tele-Op / End Game", teleopJPanel);
@@ -288,11 +262,11 @@ public class TeamInputPanel extends JPanel
     comentsJPanelLayout.setVerticalGroup(
       comentsJPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(comentsJPanelLayout.createSequentialGroup()
-        .addContainerGap()
+        .add(6, 6, 6)
         .add(commentsLabel)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 7, Short.MAX_VALUE)
+        .add(6, 6, 6)
         .add(commentsScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(33, Short.MAX_VALUE))
+        .add(6, 6, 6))
     );
 
     tabbedPanel.addTab("Comments", comentsJPanel);
@@ -334,8 +308,8 @@ public class TeamInputPanel extends JPanel
           .add(teamLabel)
           .add(teamComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(tabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 235, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(tabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(6, 6, 6)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(penaltiesLabel)
           .add(penaltiesInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -373,11 +347,6 @@ public class TeamInputPanel extends JPanel
     return score;
   }
   
-  public int getAutoShots()
-  {
-    return textFieldToScore(autoFrisbeesShotInput.getText());
-  }
-  
   public int getTeleOpScore()
   {
     int score = 0;
@@ -387,11 +356,6 @@ public class TeamInputPanel extends JPanel
     score += textFieldToScore(teleopLowGoalInput.getText()) * GOAL_LOW;
       
     return score;
-  }
-  
-  public int getTeleOpGameShots()
-  {
-    return textFieldToScore(teleopFrisbeesShotInput.getText());
   }
   
   public int getPyramidAttempt()
@@ -452,23 +416,46 @@ public class TeamInputPanel extends JPanel
     RandomData random = new RandomData();
     
     ArrayList<String> clone = new ArrayList(Arrays.asList(teamList));
-    teamComboBox.setSelectedIndex(clone.indexOf(String.valueOf(random.teamNum)));
+    teamComboBox.setSelectedIndex(clone.indexOf(String.valueOf(random.teamNum)) + 1);
     
     autoHighGoalInput.setText(String.valueOf(random.autoHighGoal));
     autoMiddleGoalInput.setText(String.valueOf(random.autoMiddleGoal));
     autoLowGoalInput.setText(String.valueOf(random.autoLowGoal));
-    autoFrisbeesShotInput.setText(String.valueOf(random.autoFrisbeesShot));
     
     teleopPyramidGoalInput.setText(String.valueOf(random.teleopPyramidGoal));
     teleopHighGoalInput.setText(String.valueOf(random.teleopHighGoal));
     teleopMiddleGoalInput.setText(String.valueOf(random.teleopMiddleGoal));
     teleopLowGoalInput.setText(String.valueOf(random.teleopLowGoal));
-    teleopFrisbeesShotInput.setText(String.valueOf(random.teleopFrisbeesShot));
     
     teleopClimbNoButton.setSelected(random.teleopPyramdidNo);
     teleopClimb10Button.setSelected(random.teleopPyramdid10);
     teleopClimb20Button.setSelected(random.teleopPyramdid20);
     teleopClimb30Button.setSelected(random.teleopPyramdid30);
+  }
+  
+  public void clear(String teamNum)
+  {
+    if(!teamNum.isEmpty())
+    {
+      ArrayList<String> clone = new ArrayList(Arrays.asList(teamList));
+      teamComboBox.setSelectedIndex(clone.indexOf(String.valueOf(teamNum)) + 1);
+    }
+    else
+      teamComboBox.setSelectedIndex(0);
+    
+    autoHighGoalInput.setText(null);
+    autoMiddleGoalInput.setText(null);
+    autoLowGoalInput.setText(null);
+    
+    teleopPyramidGoalInput.setText(null);
+    teleopHighGoalInput.setText(null);
+    teleopMiddleGoalInput.setText(null);
+    teleopLowGoalInput.setText(null);
+    
+    teleopClimbNoButton.setSelected(true);
+    teleopClimb10Button.setSelected(false);
+    teleopClimb20Button.setSelected(false);
+    teleopClimb30Button.setSelected(false);
   }
   
   public boolean isValidData()
@@ -505,8 +492,6 @@ public class TeamInputPanel extends JPanel
   }
   
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JTextField autoFrisbeesShotInput;
-  private javax.swing.JLabel autoFrisbeesShotLabel;
   private javax.swing.JTextField autoHighGoalInput;
   private javax.swing.JLabel autoHighGoalLabel;
   private javax.swing.JPanel autoJPanel;
@@ -529,8 +514,6 @@ public class TeamInputPanel extends JPanel
   private javax.swing.ButtonGroup teleopClimbButtonGroup;
   private javax.swing.JLabel teleopClimbLabel;
   private javax.swing.JRadioButton teleopClimbNoButton;
-  private javax.swing.JTextField teleopFrisbeesShotInput;
-  private javax.swing.JLabel teleopFrisbeesShotLabel;
   private javax.swing.JTextField teleopHighGoalInput;
   private javax.swing.JLabel teleopHighGoalLabel;
   private javax.swing.JPanel teleopJPanel;

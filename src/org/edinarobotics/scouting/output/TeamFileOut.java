@@ -56,7 +56,7 @@ public class TeamFileOut
     scan.close();
     
     String insertLine = String.format(
-            "%s%s%d%s%d%s%d%s%d%s%d%s",
+            "%s%s%d%s%d%s%d%s%d%s%s",
             match.matchNum, OutFiles.separator, 
             team.autoScore, OutFiles.separator,
             team.teleopScore, OutFiles.separator,

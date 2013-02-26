@@ -23,39 +23,22 @@ public class MatchFileOut
     String path = folderPath + "/" + String.valueOf(match.matchNum) + OutFiles.extension;
     
     File out = new File(path);
-    if(!out.exists())
-      try 
-      {
-        out.createNewFile();
-      }
-      catch (Exception e)
-      {
-        JOptionPane.showMessageDialog(new JPanel(), 
-                "Could not generate Match File!", 
-                "Error!", JOptionPane.ERROR_MESSAGE);
-        return;
-      }
-    
-    Scanner scan;
-    try
+    try 
     {
-      scan = new Scanner(out);
+      out.createNewFile();
     }
-    catch (FileNotFoundException ex)
+    catch (Exception e)
     {
       JOptionPane.showMessageDialog(new JPanel(), 
-                "Could not open the Match File!", 
-                "Error!", JOptionPane.ERROR_MESSAGE);
+              "Could not generate Match File!", 
+              "Error!", JOptionPane.ERROR_MESSAGE);
       return;
     }
     
     ArrayList<String> fileContent = new ArrayList();
-    while(scan.hasNext())
-      fileContent.add(scan.nextLine());
-    scan.close();
     
     String insertLine1 = String.format(
-            "%s%s%d%s%d%s%d%s%d%s",
+            "%s%s%d%s%d%s%d%s%d\n",
             "blue", OutFiles.separator, 
             match.blueTeam1, OutFiles.separator,
             match.blueTeam2, OutFiles.separator,
@@ -63,12 +46,12 @@ public class MatchFileOut
             match.blueAllianceScore);
     
     String insertLine2 = String.format(
-            "%s%s%d%s%d%s%d%s%d%s",
+            "%s%s%d%s%d%s%d%s%d",
             "red", OutFiles.separator, 
             match.redTeam1, OutFiles.separator,
             match.redTeam2, OutFiles.separator,
             match.redTeam3, OutFiles.separator,
-            match.blueAllianceScore);
+            match.redAllianceScore);
     
     fileContent.add(insertLine1);
     fileContent.add(insertLine2);
