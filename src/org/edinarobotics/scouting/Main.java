@@ -15,7 +15,6 @@ public class Main {
   @SuppressWarnings("ResultOfObjectAllocationIgnored")
   public static void main(String[] args) 
   {
-    //DataInputFrame dataInputFrame = new DataInputFrame();
     new DefaultWorkspace();
     new DataInputFrame();
   }
