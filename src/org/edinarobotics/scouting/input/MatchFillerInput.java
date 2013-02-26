@@ -80,4 +80,13 @@ public class MatchFillerInput
         
       return "";
   }
+  
+  public boolean exists(int matchNum)
+  {
+    for(String match : matchFiller)
+      if(match.startsWith(String.valueOf(matchNum) + OutFiles.separator))
+        return true;
+        
+      return false;
+  }
 }

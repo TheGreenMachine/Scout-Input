@@ -38,7 +38,7 @@ public class MatchFileOut
     ArrayList<String> fileContent = new ArrayList();
     
     String insertLine1 = String.format(
-            "%s%s%d%s%d%s%d%s%d\n",
+            "%s%s%d%s%d%s%d%s%d",
             "blue", OutFiles.separator, 
             match.blueTeam1, OutFiles.separator,
             match.blueTeam2, OutFiles.separator,
@@ -54,6 +54,7 @@ public class MatchFileOut
             match.redAllianceScore);
     
     fileContent.add(insertLine1);
+    fileContent.add(System.getProperty("line.separator"));
     fileContent.add(insertLine2);
     
     Formatter format;

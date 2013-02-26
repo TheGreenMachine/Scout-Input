@@ -70,6 +70,7 @@ public class DataInputFrame extends javax.swing.JFrame
     scoutButton = new javax.swing.JButton();
     menuBar = new javax.swing.JMenuBar();
     fileMenu = new javax.swing.JMenu();
+    lookupMatchOption = new javax.swing.JMenuItem();
     clearOption = new javax.swing.JMenuItem();
     testDataOption = new javax.swing.JMenuItem();
     editMenu = new javax.swing.JMenu();
@@ -90,6 +91,14 @@ public class DataInputFrame extends javax.swing.JFrame
     });
 
     fileMenu.setText("File");
+
+    lookupMatchOption.setText("Look Up Match");
+    lookupMatchOption.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        lookupMatchOptionActionPerformed(evt);
+      }
+    });
+    fileMenu.add(lookupMatchOption);
 
     clearOption.setText("Clear Data");
     clearOption.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +257,6 @@ public class DataInputFrame extends javax.swing.JFrame
   }//GEN-LAST:event_scoutButtonActionPerformed
 
   private void testDataOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testDataOptionActionPerformed
-    // TODO add your handling code here:
     TeamData[] teams;
     do
     {
@@ -270,7 +278,6 @@ public class DataInputFrame extends javax.swing.JFrame
   }//GEN-LAST:event_testDataOptionActionPerformed
 
   private void clearOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOptionActionPerformed
-    // TODO add your handling code here:
     teamInputPanel1.clear("");
     teamInputPanel2.clear("");
     teamInputPanel3.clear("");
@@ -282,6 +289,39 @@ public class DataInputFrame extends javax.swing.JFrame
     blueMatchScoreInput.setText(null);
     redMatchScoreInput.setText(null);
   }//GEN-LAST:event_clearOptionActionPerformed
+
+  private void lookupMatchOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookupMatchOptionActionPerformed
+    int matchNum;
+    
+    try
+    {
+      matchNum = Integer.parseInt(matchInput.getText());
+    }
+    catch (Exception e)
+    {
+      JOptionPane.showMessageDialog(this, 
+                "Invalid Match number!", 
+                "Error!", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    
+    MatchFillerInput matchFillerIn = new MatchFillerInput();
+    
+    if(!matchFillerIn.exists(matchNum))
+    {
+      JOptionPane.showMessageDialog(this, 
+                "No Match pre-data found!", 
+                "Error!", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    
+    teamInputPanel1.clear(matchFillerIn.getTeams(matchNum, 0));
+    teamInputPanel2.clear(matchFillerIn.getTeams(matchNum, 1));
+    teamInputPanel3.clear(matchFillerIn.getTeams(matchNum, 2));
+    teamInputPanel4.clear(matchFillerIn.getTeams(matchNum, 3));
+    teamInputPanel5.clear(matchFillerIn.getTeams(matchNum, 4));
+    teamInputPanel6.clear(matchFillerIn.getTeams(matchNum, 5));
+  }//GEN-LAST:event_lookupMatchOptionActionPerformed
 
   private boolean isValidMatchData()
   {
@@ -312,22 +352,13 @@ public class DataInputFrame extends javax.swing.JFrame
     return true;
   }
   
-  private void clear()
-  {
-    matchInput.setText(
-            matchInput.getText().equals("") ?
-            String.valueOf(Integer.parseInt(matchInput.getText()) + 1) :
-            "");
-    blueMatchScoreInput.setText(null);
-    redMatchScoreInput.setText(null);
-  }
-  
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTextField blueMatchScoreInput;
   private javax.swing.JLabel blueMatchScoreLabel;
   private javax.swing.JMenuItem clearOption;
   private javax.swing.JMenu editMenu;
   private javax.swing.JMenu fileMenu;
+  private javax.swing.JMenuItem lookupMatchOption;
   private javax.swing.JTextField matchInput;
   private javax.swing.JLabel matchLabel;
   private javax.swing.JMenuBar menuBar;

@@ -60,6 +60,8 @@ public class CommentFileOut
     String insertLine = String.format(
             "<pre>%s</pre>", team.comments);
     
+    if(fileContent.size() > 0)
+      fileContent.add(System.getProperty("line.separator"));
     fileContent.add(insertLine);
     
     Formatter format;

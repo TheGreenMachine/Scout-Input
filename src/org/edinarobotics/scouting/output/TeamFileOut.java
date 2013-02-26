@@ -64,6 +64,8 @@ public class TeamFileOut
             team.pyramidScore, OutFiles.separator,
             team.penalties);
     
+    if(fileContent.size() > 0)
+      fileContent.add(System.getProperty("line.separator"));
     fileContent.add(insertLine);
     
     Formatter format;
