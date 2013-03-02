@@ -64,8 +64,6 @@ public class TeamFileOut
             team.pyramidScore, OutFiles.separator,
             team.penalties);
     
-    if(fileContent.size() > 0)
-      fileContent.add(System.getProperty("line.separator"));
     fileContent.add(insertLine);
     
     Formatter format;
@@ -82,7 +80,12 @@ public class TeamFileOut
     }
     
     for(String data : fileContent)
-      format.format("%s", data);
+    {
+      if(fileContent.indexOf(data) < fileContent.size())
+        format.format("%s\n", data);
+      else
+        format.format("%s", data);
+    }
     format.close();
   }
 }

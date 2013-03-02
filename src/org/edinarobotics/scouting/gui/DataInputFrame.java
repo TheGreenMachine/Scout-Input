@@ -2,6 +2,7 @@ package org.edinarobotics.scouting.gui;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import org.edinarobotics.scouting.datatypes.MatchData;
 import org.edinarobotics.scouting.datatypes.TeamData;
@@ -18,6 +19,11 @@ public class DataInputFrame extends javax.swing.JFrame
   private static String MATCH_NUMBER_LABEL_TEXT = "Match:";
   private static String BLUE_MATCH_SCORE_LABEL_TEXT = "Blue Alliance Score:";
   private static String RED_MATCH_SCORE_LABEL_TEXT = "Red Alliance Score:";
+  
+  private static int TEST_DATA_ENTRY_LIMIT = 1;
+  private static int TEST_DATA_ENTRY_BLUE_SCORE_LIMIT = 130;
+  private static int TEST_DATA_ENTRY_RED_SCORE_LIMIT = 130;
+  
   
   private static String[] teamInputIndex = new String[] 
     {"[Top, Left]", "[Top, Middle]", "[Top, Right]",
@@ -258,23 +264,35 @@ public class DataInputFrame extends javax.swing.JFrame
 
   private void testDataOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testDataOptionActionPerformed
     TeamData[] teams;
-    do
+    
+    for(int i = 0; i < TEST_DATA_ENTRY_LIMIT; i++)
     {
-      teamInputPanel1.setRandomData();
-      teamInputPanel2.setRandomData();
-      teamInputPanel3.setRandomData();
-      teamInputPanel4.setRandomData();
-      teamInputPanel5.setRandomData();
-      teamInputPanel6.setRandomData();
+      do
+      {
+        teamInputPanel1.setRandomData();
+        teamInputPanel2.setRandomData();
+        teamInputPanel3.setRandomData();
+        teamInputPanel4.setRandomData();
+        teamInputPanel5.setRandomData();
+        teamInputPanel6.setRandomData();
+
+        teams = new TeamData[] {
+        new TeamData(teamInputPanel1),
+        new TeamData(teamInputPanel2),
+        new TeamData(teamInputPanel3),
+        new TeamData(teamInputPanel4),
+        new TeamData(teamInputPanel5),
+        new TeamData(teamInputPanel6)};
+      } while(!isValidTeamsData(teams));
       
-      teams = new TeamData[] {
-      new TeamData(teamInputPanel1),
-      new TeamData(teamInputPanel2),
-      new TeamData(teamInputPanel3),
-      new TeamData(teamInputPanel4),
-      new TeamData(teamInputPanel5),
-      new TeamData(teamInputPanel6)};
-    } while(!isValidTeamsData(teams));
+      blueMatchScoreInput.setText(String.valueOf(
+              new Random().nextInt(TEST_DATA_ENTRY_BLUE_SCORE_LIMIT)));
+      redMatchScoreInput.setText(String.valueOf(
+              new Random().nextInt(TEST_DATA_ENTRY_RED_SCORE_LIMIT)));
+      
+      if(i < TEST_DATA_ENTRY_LIMIT)
+        scoutButtonActionPerformed(null);
+    }
   }//GEN-LAST:event_testDataOptionActionPerformed
 
   private void clearOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOptionActionPerformed
